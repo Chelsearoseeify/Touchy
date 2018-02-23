@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".CategoriesActivity">
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:columnCount="2"
+        android:rowCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/first"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSapphireButton">
+
+                    <Button
+                        android:id="@+id/ActivitiesButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDarkBlueButton"
+                        android:text="@string/activities" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/second"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@color/colorSapphireButton">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLightBrownButton">
+
+                    <Button
+                        android:id="@+id/EatingButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDarkTealButton"
+                        android:text="@string/eating" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </TableRow>
+
+        <TableRow>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/third"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSapphireButton">
+
+                    <Button
+                        android:id="@+id/TravellingButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorLightTealButton"
+                        android:text="@string/travelling" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/firth"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorSapphireButton">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLightBrownButton">
+
+                    <Button
+                        android:id="@+id/ServicesButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorSapphireButton"
+                        android:text="@string/services" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </TableRow>
+
+        <TableRow>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/fifth"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSapphireButton">
+
+                    <Button
+                        android:id="@+id/MarketButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorLightLightBlueButton"
+                        android:text="@string/grocery" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/sixth"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorSapphireButton">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLightBrownButton">
+
+                    <Button
+                        android:id="@+id/HealthButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAquamarineButton"
+                        android:text="@string/health" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </TableRow>
+
+        <TableRow>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/seventh"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSapphireButton">
+
+                    <Button
+                        android:id="@+id/SleepingButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorLightBrownButton"
+                        android:text="@string/sleeping" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/eighth"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorSapphireButton">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLightBrownButton">
+
+                    <Button
+                        android:id="@+id/EmergencyButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorBrownButton"
+                        android:text="@string/emergency" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

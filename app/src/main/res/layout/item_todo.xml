@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".StructureChosenActivity">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982" />
+
+    <LinearLayout
+        android:id="@+id/TextViewLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ViewToFill"
+        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04">
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+             />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME:"
+             />
+
+        <TextView
+            android:id="@+id/categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CATEGORY:"
+             />
+
+        <TextView
+            android:id="@+id/segmento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SEGMENT:"
+             />
+
+        <TextView
+            android:id="@+id/tipologia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIPOLOGY:"
+             />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAIL:"
+             />
+
+        <TextView
+            android:id="@+id/sito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SITE:"
+             />
+
+        <TextView
+            android:id="@+id/latitudine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LATITUDE:"
+             />
+
+        <TextView
+            android:id="@+id/longitudine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LONGITUDE:"
+             />
+
+        <TextView
+            android:id="@+id/indirizzo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADDRESS"
+             />
+
+        <TextView
+            android:id="@+id/telefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TELEFONO"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ViewToFill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04">
+
+        <TextView
+            android:id="@+id/idView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextID"
+             />
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextNAME"
+             />
+
+        <TextView
+            android:id="@+id/categoriaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextCATEGORY"
+             />
+
+        <TextView
+            android:id="@+id/segmentoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextSEGMENT"
+             />
+
+        <TextView
+            android:id="@+id/tipologiaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextTIPOLOGY"
+             />
+
+        <TextView
+            android:id="@+id/emailView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextMAIL"
+             />
+
+        <TextView
+            android:id="@+id/sitoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextSITE"
+             />
+
+        <TextView
+            android:id="@+id/latitudineView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextLATITUDE"
+             />
+
+        <TextView
+            android:id="@+id/longitudineView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextLONGITUDE"
+             />
+
+        <TextView
+            android:id="@+id/indirizzoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextADDRESS"
+             />
+
+        <Button
+            android:id="@+id/telefonoView"
+            android:layout_width="113dp"
+            android:layout_height="20dp"
+            android:background="#ffffff"
+            android:text="tel" />
+
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

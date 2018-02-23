@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Touch</string>
+    <string name="logo_content_description">Logo</string>
+    <string name="slogan_content_description">Slogan</string>
+    <string name="logintext_content_description">LoginText</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button_text">LOGIN</string>
+    <string name="sign_up_text">Not a member? Sign up now</string>
+    <string name="sign_in_text">Already register! Login me</string>
+    <string name="register_button_text">Register</string>
+    <string name="username_hint">Username</string>
+    <string name="activities">Attività</string>
+    <string name="sleeping">Alloggiare</string>
+    <string name="eating">Mangiare</string>
+    <string name="travelling">Viaggiare</string>
+    <string name="health">Benessere</string>
+    <string name="services">Servizi</string>
+    <string name="grocery">Spesa</string>
+    <string name="emergency">Emergenza</string>
+    <string name="hint_confirm_password">Confirm password</string>
+
+    <string-array name="situation">
+        <item>family with children</item>
+        <item>couple</item>
+        <item>friends</item>
+        <item>alone</item>
+    </string-array>
+
+    <string-array name="country">
+        <item>Italia</item>
+        <item>Svizzera</item>
+        <item>Germania</item>
+        <item>Francia</item>
+        <item>Austria</item>
+    </string-array>
+
+    <string-array name="hobbies">
+        <item>Shopping</item>
+        <item>Culture</item>
+        <item>Sport</item>
+        <item>Trekking</item>
+        <item>Relax</item>
+        <item>Fun</item>
+        <item>Shows</item>
+        <item>Food</item>
+    </string-array>
+
+</resources>

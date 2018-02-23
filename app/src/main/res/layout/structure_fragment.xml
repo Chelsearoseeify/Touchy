@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/structureFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:layout_marginStart="28dp"
+    android:layout_marginEnd="28dp"
+    android:layout_gravity="center"
+    android:name="com.example.selen.touch.Structure"
+    tools:layout="@layout/structure_layout">
+
+
+</fragment>
