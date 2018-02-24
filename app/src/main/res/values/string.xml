@@ -19,6 +19,8 @@
     <string name="grocery">Spesa</string>
     <string name="emergency">Emergenza</string>
     <string name="hint_confirm_password">Confirm password</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string-array name="situation">
         <item>family with children</item>
