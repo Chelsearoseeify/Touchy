@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -22,16 +24,25 @@ import com.example.selen.touch.helper.adapter.StructuresAdapter;
 import com.example.selen.touch.helper.cursor_adapter.GeoCursorAdapter;
 import com.example.selen.touch.helper.cursor_adapter.StructuresCursorAdapter;
 
+import java.util.ArrayList;
+
 public class CategoryChosenActivity extends Activity {
 
 
     private StructuresAdapter dbStructureHelper;
     private ContactAdapter dbContactHelper;
+    private GeoAdapter dbGeoHelper;
     //private GeoAdapter dbGeoHelper;
     private SimpleCursorAdapter dataAdapter;
     private Button backButton;
     private String currentCategory;
     //private CardView structureCard;
+
+    //a list to store all the products
+    ArrayList<Structure> structureList;
+
+    //the recyclerview
+    RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,13 +53,25 @@ public class CategoryChosenActivity extends Activity {
         currentCategory = getIntent().getExtras().getString("category");
         //structureCard = (CardView) findViewById(R.id.card_view);
 
+        //getting the recyclerview from xml
+        recyclerView = findViewById(R.id.structuresRecycle);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         dbStructureHelper = new StructuresAdapter(this);
         dbContactHelper = new ContactAdapter(this);
-        //dbGeoHelper = new GeoAdapter(this);
+        dbGeoHelper = new GeoAdapter(this);
 
         dbStructureHelper.open();
         dbContactHelper.open();
-        //dbGeoHelper.open();
+        dbGeoHelper.open();
+
+        structureList = new ArrayList<Structure>();
+
+        createStructureList(structureList);
+
+        StructuresListAdapter adapter = new StructuresListAdapter(CategoryChosenActivity.this, structureList);
+        recyclerView.setAdapter(adapter);
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -66,9 +89,28 @@ public class CategoryChosenActivity extends Activity {
         //dbStructureHelper.insertSomeStructures();
 
         //Generate ListView from SQLite Database
-        displayListView();
-        display();
+        //displayListView();
+        //display();
 
+    }
+
+    private ArrayList<Structure> createStructureList(ArrayList<Structure> structureList){
+
+        Cursor structCursor = dbStructureHelper.fetchAllStructures();
+        //Cursor geoCursor = dbGeoHelper.fetchAllStructures();
+        for(structCursor.moveToFirst(); !structCursor.isAfterLast(); structCursor.moveToNext()) {
+            // The Cursor is now set to the right position
+            //geoCursor = dbGeoHelper.getGeoById(structCursor.getColumnIndexOrThrow("_id"));
+
+            String nome = structCursor.getString(structCursor.getColumnIndexOrThrow("struttura"));
+            String segmento = structCursor.getString(structCursor.getColumnIndexOrThrow("segmento"));
+            //String image = geoCursor.getString(geoCursor.getColumnIndexOrThrow("image"));
+            String image = dbGeoHelper.getImageFromId(Integer.parseInt(structCursor.getString(structCursor.getColumnIndexOrThrow("_id"))));
+
+            structureList.add(new Structure(nome, segmento, image));
+        }
+
+        return structureList;
     }
 
     private void display(){

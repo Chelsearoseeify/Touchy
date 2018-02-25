@@ -1,24 +1,31 @@
 package com.example.selen.touch;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 /**
  * Created by Administrator on 16/12/2017.
  */
 
-public class Structure extends Fragment {
+public class Structure {
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
+    private String name;
+    private String segmento;
+    private String image;
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.structure_fragment, container, false);
+    public Structure(String name, String segmento, String image) {
+        this.name = name;
+        this.segmento = segmento;
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSegmento() {
+        return segmento;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
+

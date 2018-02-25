@@ -35,7 +35,7 @@ public class GeoCursorAdapter extends CursorAdapter{
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        ImageView structureImage = (ImageView) view.findViewById(R.id.imageViewStructure);
+        ImageView structureImage = (ImageView) view.findViewById(R.id.imageView);
 
         //loading the image
         Glide.with(mCtx)

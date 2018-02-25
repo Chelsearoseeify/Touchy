@@ -158,4 +158,11 @@ public class GeoAdapter {
         return mCursor;
     }
 
+    public String getImageFromId(Integer id){
+        Cursor imageCursor = getGeoById(id);
+        String image = imageCursor.getString(imageCursor.getColumnIndexOrThrow("image"));
+
+        return image;
+    }
+
 }
