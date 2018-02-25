@@ -1,4 +1,4 @@
-package com.example.selen.touch;
+package com.example.selen.touch.register;
 /**
  * Created by Administrator on 19/11/2017.
  */
@@ -9,17 +9,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.selen.touch.HomeActivity;
+import com.example.selen.touch.login.LoginActivity;
+import com.example.selen.touch.R;
 import com.example.selen.touch.app.AppConfig;
 import com.example.selen.touch.app.AppController;
 import com.example.selen.touch.helper.SQLiteUserHandler;
@@ -31,34 +31,32 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Register2Activity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private static final String TAG = Register2Activity.class.getSimpleName();
+    private static final String TAG = RegisterActivity.class.getSimpleName();
     private Button btnNext;
     private Button btnLinkToLogin;
-    private String gender;
-    private String situation;
-    private String country;
-    private Spinner countrySpinner;
-    private Spinner situationSpinner;
-    private String uid;
-    private EditText inputBirthday;
+    private EditText inputFullName;
+    private EditText inputEmail;
+    private EditText inputPassword;
+    private EditText inputcPassword;
+    private EditText inputCode;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteUserHandler db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_2);
+        setContentView(R.layout.activity_register);
 
-        inputBirthday = (EditText) findViewById(R.id.idBirthday);
+        inputFullName = (EditText) findViewById(R.id.idName);
+        inputEmail = (EditText) findViewById(R.id.idEmail);
+        inputPassword = (EditText) findViewById(R.id.idPassword);
+        inputcPassword = (EditText) findViewById(R.id.idcPassword);
+        inputCode = (EditText) findViewById(R.id.idCode);
         btnNext = (Button) findViewById(R.id.RegisterButton);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
-        situationSpinner = (Spinner) findViewById(R.id.idSituationSpinner);
-        countrySpinner = (Spinner) findViewById(R.id.idCountrySpinner);
-        uid = getIntent().getExtras().getString("uid");
 
 
         // Progress dialog
@@ -74,7 +72,7 @@ public class Register2Activity extends AppCompatActivity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(Register2Activity.this,
+            Intent intent = new Intent(RegisterActivity.this,
                     HomeActivity.class);
             startActivity(intent);
             finish();
@@ -83,12 +81,14 @@ public class Register2Activity extends AppCompatActivity {
         // Register Button Click event
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String birthday = inputBirthday.getText().toString().trim();
-                String situation = situationSpinner.getSelectedItem().toString();
-                String country = countrySpinner.getSelectedItem().toString();
+                String name = inputFullName.getText().toString().trim();
+                String email = inputEmail.getText().toString().trim();
+                String password = inputPassword.getText().toString().trim();
+                String cpassword = inputcPassword.getText().toString().trim();
+                String code = inputCode.getText().toString().trim();
 
-                if (!birthday.isEmpty()) {
-                    registerUser(uid, birthday, gender, situation, country);
+                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() &&!cpassword.isEmpty()) {
+                    registerUser(name, email, password, cpassword, code);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -108,34 +108,22 @@ public class Register2Activity extends AppCompatActivity {
             }
         });
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.situation, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        situationSpinner.setAdapter(adapter);
-
-        ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.country, android.R.layout.simple_spinner_item);
-        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        countrySpinner.setAdapter(countryAdapter);
     }
 
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void registerUser(final String uid, final String birthday, final String gender,
-                              final String situation, final String country) {
+    private void registerUser(final String name, final String email,
+                              final String password, final String cPassword, final String code) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
-        pDialog.setMessage("Registering ...");
-        showDialog();
+        //pDialog.setMessage("Registering ...");
+        //showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER2, new Response.Listener<String>() {
+                AppConfig.URL_REGISTER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -146,12 +134,26 @@ public class Register2Activity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
-                       Toast.makeText(getApplicationContext(), "Check your mail to confirm registration", Toast.LENGTH_LONG).show();
+                        // User successfully stored in MySQL
+                        // Now store the user in sqlite
+                        String uid = jObj.getString("uid");
+
+                        JSONObject user = jObj.getJSONObject("user");
+                        String name = user.getString("name");
+                        String email = user.getString("email");
+                        String created_at = user
+                                .getString("created_at");
+
+                        // Inserting row in users table
+                        db.addUser(name, email, uid, created_at);
+
+                        //Toast.makeText(getApplicationContext(), "Check your mail to confirm registration", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
                         Intent intent = new Intent(
-                                Register2Activity.this,
-                                LoginActivity.class);
+                                RegisterActivity.this,
+                                Register2Activity.class);
+                        intent.putExtra("uid", uid);
                         startActivity(intent);
                         finish();
                     } else {
@@ -182,11 +184,11 @@ public class Register2Activity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("uid", uid);
-                params.put("birthday", birthday);
-                params.put("gender", gender);
-                params.put("situation", situation);
-                params.put("country", country);
+                params.put("name", name);
+                params.put("email", email);
+                params.put("password", password);
+                params.put("cPassword", cPassword);
+                params.put("code", code);
 
                 return params;
             }
@@ -206,22 +208,4 @@ public class Register2Activity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
-
-    public void onRadioButtonClicked(View view) {
-
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.idMale:
-                if (checked){
-                    gender = "M";
-                    break;}
-            case R.id.idFemale:
-                if (checked){
-                    gender = "F";
-                    break;}
-        }
-    }
-
 }

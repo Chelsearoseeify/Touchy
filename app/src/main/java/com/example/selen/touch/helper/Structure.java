@@ -1,62 +1,37 @@
 package com.example.selen.touch.helper;
 
+/**
+ * Created by Administrator on 16/12/2017.
+ */
 
 public class Structure {
-    private String struttura = null;
-    private String categoria = null;
-    private String segmento = null;
-    private String tipologia = null;
-    private String sito = null;
-    private String mail = null;
-    private String indirizzo = null;
 
-    public String getSito() {
-        return sito;
-    }
+    private Integer id;
+    private String name;
+    private String segmento;
+    private String image;
 
-    public void setSito(String sito) {
-        this.sito = sito;
+    public Structure(Integer id, String name, String segmento, String image) {
+        this.id = id;
+        this.name = name;
+        this.segmento = segmento;
+        this.image = image;
     }
 
-    public String getMail() {
-        return mail;
+    public Integer getId(){
+        return id;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public String getName() {
+        return name;
     }
 
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
-    public String getStruttura() {
-        return struttura;
-    }
-    public void setStruttura(String struttura) {
-        this.struttura = struttura;
-    }
-    public String getCategoria() {
-        return categoria;
-    }
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
     public String getSegmento() {
         return segmento;
     }
-    public void setSegmento(String segmento) {
-        this.segmento = segmento;
-    }
-    public String getTipologia() {
-        return tipologia;
-    }
-    public void setTipologia(String tipologia) {
-        this.tipologia = tipologia;
-    }
 
+    public String getImage() {
+        return image;
+    }
 }
+

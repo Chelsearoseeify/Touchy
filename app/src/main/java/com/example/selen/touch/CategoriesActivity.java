@@ -115,5 +115,12 @@ public class CategoriesActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CategoriesActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
 }

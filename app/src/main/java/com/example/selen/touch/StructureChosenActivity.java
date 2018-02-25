@@ -29,22 +29,9 @@ public class StructureChosenActivity extends AppCompatActivity {
     ContactAdapter dbContact;
     StructuresAdapter dbStructures;
     GeoAdapter dbGeo;
-    TextView id;
-    TextView name;
-    TextView category;
-    TextView segment;
-    TextView tipology;
-    TextView site;
-    TextView mail;
-    TextView phone;
-    TextView latitude;
-    TextView longitude;
-    TextView address;
-    ImageButton imageButtonMail;
-    ImageButton imageButtonPhone;
-    ImageButton imageButtonWeb;
+    TextView id, name, category, segment, tipology, site, mail, phone, latitude, longitude, address;
+    ImageButton imageButtonMail, imageButtonPhone, imageButtonWeb;
     Cursor structuresCursor, contactCursor, geoCursor;
-    Button backButton;
 
 
     @Override
@@ -52,13 +39,12 @@ public class StructureChosenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.structure_layout);
 
-        backButton = findViewById(R.id.back);
         imageButtonMail = (ImageButton) findViewById(R.id.imageButtonMail);
         imageButtonPhone = (ImageButton) findViewById(R.id.imageButtonPhone);
         imageButtonWeb = (ImageButton) findViewById(R.id.imageButtonWeb);
 
 
-        String idStringFromIntent = getIntent().getExtras().getString("id_struttura");
+        Integer idFromIntent = getIntent().getExtras().getInt("id_struttura");
 
         dbContact = new ContactAdapter(this);
         dbStructures = new StructuresAdapter(this);
@@ -68,9 +54,9 @@ public class StructureChosenActivity extends AppCompatActivity {
         dbStructures.open();
         dbGeo.open();
 
-        contactCursor = dbContact.getContactById(Integer.parseInt(idStringFromIntent));
-        geoCursor = dbGeo.getGeoById(Integer.parseInt(idStringFromIntent));
-        structuresCursor = dbStructures.getStructureById(Integer.parseInt(idStringFromIntent));
+        contactCursor = dbContact.getContactById(idFromIntent);
+        geoCursor = dbGeo.getGeoById(idFromIntent);
+        structuresCursor = dbStructures.getStructureById(idFromIntent);
 
 
         id = (TextView) findViewById(R.id.idView);
@@ -86,11 +72,7 @@ public class StructureChosenActivity extends AppCompatActivity {
         address = (TextView) findViewById(R.id.indirizzoView);
 
 
-        //id.setText(idStringFromIntent);
         name.setText(structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("struttura")));
-        //category.setText(structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("categoria")));
-        //segment.setText(structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("segmento")));
-        //tipology.setText(structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("tipologia")));
         site.setText(contactCursor.getString(contactCursor.getColumnIndexOrThrow("sito")));
         mail.setText(contactCursor.getString(contactCursor.getColumnIndexOrThrow("mail")));
         phone.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("telefono")));
@@ -98,16 +80,6 @@ public class StructureChosenActivity extends AppCompatActivity {
         //longitude.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("longitudine")));
         //address.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("indirizzo")));
 
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StructureChosenActivity.this, CategoryChosenActivity.class);
-                intent.putExtra("category", structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("categoria")));
-                startActivity(intent);
-                finish();
-            }
-        });
 
         imageButtonMail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,8 +133,13 @@ public class StructureChosenActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(StructureChosenActivity.this, CategoryChosenActivity.class);
+        intent.putExtra("category", structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("categoria")));
+        startActivity(intent);
+        finish();
     }
 }

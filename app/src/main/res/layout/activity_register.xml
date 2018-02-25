@@ -7,7 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/colorBackground"
 android:orientation="vertical"
-tools:context="com.example.selen.touch.RegisterActivity">
+tools:context="com.example.selen.touch.register.RegisterActivity">
 
 
     <TextView

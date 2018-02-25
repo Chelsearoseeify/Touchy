@@ -1,4 +1,4 @@
-package com.example.selen.touch;
+package com.example.selen.touch.helper.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.selen.touch.R;
+import com.example.selen.touch.helper.Structure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
  * Created by Belal on 10/18/2017.
  */
 
-public class StructuresListAdapter extends RecyclerView.Adapter<StructuresListAdapter.ProductViewHolder> {
+public class StructuresListAdapter extends RecyclerView.Adapter<StructuresListAdapter.ProductViewHolder>{
 
 
     private Context mCtx;
@@ -26,6 +28,11 @@ public class StructuresListAdapter extends RecyclerView.Adapter<StructuresListAd
     public StructuresListAdapter(Context mCtx, ArrayList<Structure> structureList) {
         this.mCtx = mCtx;
         this.structureList = structureList;
+    }
+
+    public Structure getItemAtPosition(int position){
+        Structure structure = structureList.get(position);
+        return structure;
     }
 
     @Override
@@ -53,7 +60,9 @@ public class StructuresListAdapter extends RecyclerView.Adapter<StructuresListAd
         return structureList.size();
     }
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+
+
+    class ProductViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewTitle, textViewSegment;
         ImageView imageView;
@@ -65,5 +74,7 @@ public class StructuresListAdapter extends RecyclerView.Adapter<StructuresListAd
             textViewSegment = itemView.findViewById(R.id.textViewSegment);
             imageView = itemView.findViewById(R.id.imageView);
         }
+
     }
 }
+

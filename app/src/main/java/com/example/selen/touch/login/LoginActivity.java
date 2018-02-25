@@ -1,4 +1,4 @@
-package com.example.selen.touch;
+package com.example.selen.touch.login;
 
 /**
  * Created by Administrator on 19/11/2017.
@@ -18,10 +18,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.selen.touch.HomeActivity;
+import com.example.selen.touch.R;
 import com.example.selen.touch.app.AppConfig;
 import com.example.selen.touch.app.AppController;
 import com.example.selen.touch.helper.SQLiteUserHandler;
 import com.example.selen.touch.helper.SessionManager;
+import com.example.selen.touch.register.RegisterActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Session manager
         session = new SessionManager(getApplicationContext());
-/*
+
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
@@ -67,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-*/
+
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
 

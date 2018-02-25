@@ -22,11 +22,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.selen.touch.app.AppConfig;
 import com.example.selen.touch.app.AppController;
+import com.example.selen.touch.drawers_activities.AccountActivity;
+import com.example.selen.touch.drawers_activities.CalendarActivity;
+import com.example.selen.touch.drawers_activities.FavoritesActivity;
+import com.example.selen.touch.drawers_activities.ToolsActivity;
 import com.example.selen.touch.helper.adapter.ContactAdapter;
 import com.example.selen.touch.helper.adapter.GeoAdapter;
 import com.example.selen.touch.helper.SQLiteUserHandler;
 import com.example.selen.touch.helper.SessionManager;
 import com.example.selen.touch.helper.adapter.StructuresAdapter;
+import com.example.selen.touch.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar tb;
 
     private TextView txtName;
-    private TextView txtEmail;
+    //private TextView txtEmail;
     private Button btnLogout;
     private Button btnMainPage;
 
@@ -394,14 +399,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_account) {
+            Intent intent = new Intent(HomeActivity.this, AccountActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_favorites) {
+            Intent intent = new Intent(HomeActivity.this, FavoritesActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_calendar) {
+            Intent intent = new Intent(HomeActivity.this, CalendarActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_tools) {
+            Intent intent = new Intent(HomeActivity.this, ToolsActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

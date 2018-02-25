@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.selen.touch.LoginActivity;
+import com.example.selen.touch.login.LoginActivity;
 import com.example.selen.touch.R;
 
 /**
