@@ -105,7 +105,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/imageViewStructure"
                 android:layout_width="153dp"
                 android:layout_height="149dp"
                 android:layout_marginBottom="8dp"

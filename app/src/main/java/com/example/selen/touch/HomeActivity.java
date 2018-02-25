@@ -322,6 +322,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         String longitudine = c.getString("longitudine");
                         String indirizzo = c.getString("indirizzo");
                         String comune = c.getString("comune");
+                        String image = c.getString("image_path");
 
                         // tmp hash map for single structure
                         HashMap<String, String> structure = new HashMap<>();
@@ -333,12 +334,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         structure.put("longitudine", longitudine);
                         structure.put("indirizzo", indirizzo);
                         structure.put("comune", comune);
+                        structure.put("image", image);
 
                         // adding structure to structure list
                         list.add(structure);
                         dbGeoHelper.createGeo(Integer.parseInt(structure.get("_id")), structure.get("telefono"),
                                 Float.parseFloat(structure.get("latitudine")), Float.parseFloat(structure.get("longitudine")),
-                                structure.get("indirizzo"), structure.get("comune"));
+                                structure.get("indirizzo"), structure.get("comune"), structure.get("image"));
                         //VolleyResponse(list);
                     }
                 } catch (JSONException e) {

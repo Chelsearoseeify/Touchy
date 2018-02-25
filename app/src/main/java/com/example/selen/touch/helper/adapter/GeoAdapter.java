@@ -23,6 +23,8 @@ public class GeoAdapter {
     private static final String KEY_INDIRIZZO = "indirizzo";
     private static final String KEY_COMUNE = "comune";
 
+    private static final String KEY_IMAGE = "image";
+
 
     private static final String TAG = "GeoAdapter";
     private DatabaseHelper mDbHelper;
@@ -41,8 +43,9 @@ public class GeoAdapter {
                     KEY_TELEFONO + "," +
                     KEY_LATITUDINE + " real," +
                     KEY_LONGITUDINE + " real," +
-                    KEY_INDIRIZZO +"," +
-                    KEY_COMUNE + ");";
+                    KEY_INDIRIZZO + "," +
+                    KEY_COMUNE + "," +
+                    KEY_IMAGE + ");";
 
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
@@ -83,7 +86,7 @@ public class GeoAdapter {
     }
 
     public long createGeo(Integer id, String telefono, Float latitudine,
-                              Float longitudine, String indirizzo, String comune) {
+                              Float longitudine, String indirizzo, String comune, String image) {
 
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_ID, id);
@@ -92,6 +95,7 @@ public class GeoAdapter {
         initialValues.put(KEY_LONGITUDINE, longitudine);
         initialValues.put(KEY_INDIRIZZO, indirizzo);
         initialValues.put(KEY_COMUNE, comune);
+        initialValues.put(KEY_IMAGE, image);
 
         return mDb.insert(SQLITE_TABLE, null, initialValues);
     }
@@ -110,13 +114,13 @@ public class GeoAdapter {
         Cursor mCursor = null;
         if (category == null  ||  category.length () == 0)  {
             mCursor = mDb.query(SQLITE_TABLE, new String[] {KEY_ROWID, KEY_ID,  KEY_TELEFONO,
-                            KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE},
+                            KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE, KEY_IMAGE},
                     null, null, null, null, null);
 
         }
         else {
             mCursor = mDb.query(true, SQLITE_TABLE, new String[] {KEY_ROWID, KEY_ID,  KEY_TELEFONO,
-                            KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE},
+                            KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE, KEY_IMAGE},
                     KEY_LATITUDINE + " like '%" + category + "%'", null,
                     null, null, null, null);
         }
@@ -130,7 +134,7 @@ public class GeoAdapter {
     public Cursor fetchAllStructures() {
 
         Cursor mCursor = mDb.query(SQLITE_TABLE, new String[] {KEY_ROWID, KEY_ID,  KEY_TELEFONO,
-                        KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE},
+                        KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE, KEY_IMAGE},
                 null, null, null, null, null);
 
         if (mCursor != null) {
@@ -142,12 +146,15 @@ public class GeoAdapter {
     public Cursor getGeoById(Integer id) {
 
         Cursor mCursor = mDb.query(SQLITE_TABLE, new String[] {KEY_ROWID, KEY_ID, KEY_TELEFONO,
-                        KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE},
+                        KEY_LATITUDINE, KEY_LONGITUDINE, KEY_INDIRIZZO, KEY_COMUNE, KEY_IMAGE},
                 KEY_ID + " = " + id, null, null, null, null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
+
+        String image = mCursor.getString(mCursor.getColumnIndex(KEY_IMAGE));
+
         return mCursor;
     }
 

@@ -17,7 +17,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.selen.touch.helper.adapter.ContactAdapter;
+import com.example.selen.touch.helper.adapter.GeoAdapter;
 import com.example.selen.touch.helper.adapter.StructuresAdapter;
+import com.example.selen.touch.helper.cursor_adapter.GeoCursorAdapter;
 import com.example.selen.touch.helper.cursor_adapter.StructuresCursorAdapter;
 
 public class CategoryChosenActivity extends Activity {
@@ -25,10 +27,11 @@ public class CategoryChosenActivity extends Activity {
 
     private StructuresAdapter dbStructureHelper;
     private ContactAdapter dbContactHelper;
+    //private GeoAdapter dbGeoHelper;
     private SimpleCursorAdapter dataAdapter;
     private Button backButton;
     private String currentCategory;
-    private CardView structureCard;
+    //private CardView structureCard;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,11 @@ public class CategoryChosenActivity extends Activity {
 
         dbStructureHelper = new StructuresAdapter(this);
         dbContactHelper = new ContactAdapter(this);
+        //dbGeoHelper = new GeoAdapter(this);
 
         dbStructureHelper.open();
         dbContactHelper.open();
+        //dbGeoHelper.open();
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -68,12 +73,11 @@ public class CategoryChosenActivity extends Activity {
 
     private void display(){
         ListView listView = (ListView) findViewById(R.id.structures);
-        //StructuresCursorAdapter structuresAdapter = new StructuresCursorAdapter(this, dbStructureHelper.fetchAllStructures());
         StructuresCursorAdapter structuresAdapter = new StructuresCursorAdapter(this, dbStructureHelper.fetchStructuresByCategory(currentCategory));
-        //ContactsCursorAdapter contactsAdapter = new ContactsCursorAdapter(this, dbContactHelper.fetchAllContact());
+        //GeoCursorAdapter geoAdapter = new GeoCursorAdapter(this, dbGeoHelper.fetchStructuresByCategory(currentCategory));
         // Attach cursor adapter to the ListView
         listView.setAdapter(structuresAdapter);
-        //listView.setAdapter(contactsAdapter);
+        //listView.setAdapter(geoAdapter);
 
 
 

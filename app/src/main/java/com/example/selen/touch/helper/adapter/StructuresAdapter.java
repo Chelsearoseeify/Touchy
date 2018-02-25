@@ -142,6 +142,11 @@ public class StructuresAdapter {
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
+
+        String struttura = mCursor.getString(mCursor.getColumnIndex(KEY_STRUTTURA));
+        String categoria = mCursor.getString(mCursor.getColumnIndex(KEY_CATEGORIA));
+
+
         return mCursor;
     }
 
