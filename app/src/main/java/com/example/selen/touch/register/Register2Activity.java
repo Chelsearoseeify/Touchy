@@ -3,17 +3,23 @@ package com.example.selen.touch.register;
  * Created by Administrator on 19/11/2017.
  */
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,6 +37,8 @@ import com.example.selen.touch.helper.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,16 +47,21 @@ public class Register2Activity extends AppCompatActivity {
     private static final String TAG = Register2Activity.class.getSimpleName();
     private Button btnNext;
     private Button btnLinkToLogin;
+    private Button btnCalendar;
     private String gender;
     //private String situation;
     //private String country;
     private Spinner countrySpinner;
     private Spinner situationSpinner;
     private String uid;
-    private EditText inputBirthday;
+    private TextView inputBirthday;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteUserHandler db;
+    Calendar calendar;
+    int year, month, day;
+    String monthConverted;
+    String dayConverted;
 
 
     @Override
@@ -56,13 +69,13 @@ public class Register2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_2);
 
-        inputBirthday = (EditText) findViewById(R.id.idBirthday);
+        inputBirthday = (TextView) findViewById(R.id.idBirthday);
+        btnCalendar = (Button) findViewById(R.id.imageButtonCalendar);
         btnNext = (Button) findViewById(R.id.RegisterButton);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         situationSpinner = (Spinner) findViewById(R.id.idSituationSpinner);
         countrySpinner = (Spinner) findViewById(R.id.idCountrySpinner);
         uid = getIntent().getExtras().getString("uid");
-
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -82,6 +95,40 @@ public class Register2Activity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        calendar = Calendar.getInstance();
+
+        day = 01;
+        month = 01;
+        year = 1900;
+
+        inputBirthday.setText(year + "-" + month +"-" + day);
+
+        inputBirthday.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Register2Activity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month = month+1;
+                        if(month>0&&month<=9)
+                            monthConverted = "0" + month;
+                        else
+                            monthConverted = Integer.toString(month);
+                        if(dayOfMonth>0&&dayOfMonth<=9)
+                            dayConverted = "0" + dayOfMonth;
+                        else
+                            dayConverted = Integer.toString(dayOfMonth);
+
+                        inputBirthday.setText(year + "-" + monthConverted +"-" + dayConverted);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+
 
         // Register Button Click event
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +175,7 @@ public class Register2Activity extends AppCompatActivity {
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
-     * */
+     */
     private void registerUser(final String uid, final String birthday, final String gender,
                               final String situation, final String country) {
         // Tag used to cancel the request
@@ -149,7 +196,7 @@ public class Register2Activity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
-                       Toast.makeText(getApplicationContext(), "Check your mail to confirm registration", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Check your mail to confirm registration", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
                         Intent intent = new Intent(
@@ -215,16 +262,17 @@ public class Register2Activity extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.idMale:
-                if (checked){
+                if (checked) {
                     gender = "M";
-                    break;}
+                    break;
+                }
             case R.id.idFemale:
-                if (checked){
+                if (checked) {
                     gender = "F";
-                    break;}
+                    break;
+                }
         }
     }
-
 }
