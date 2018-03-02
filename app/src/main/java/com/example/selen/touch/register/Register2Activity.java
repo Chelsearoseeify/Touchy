@@ -47,7 +47,6 @@ public class Register2Activity extends AppCompatActivity {
     private static final String TAG = Register2Activity.class.getSimpleName();
     private Button btnNext;
     private Button btnLinkToLogin;
-    private Button btnCalendar;
     private String gender;
     //private String situation;
     //private String country;
@@ -70,7 +69,6 @@ public class Register2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_register_2);
 
         inputBirthday = (TextView) findViewById(R.id.idBirthday);
-        btnCalendar = (Button) findViewById(R.id.imageButtonCalendar);
         btnNext = (Button) findViewById(R.id.RegisterButton);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         situationSpinner = (Spinner) findViewById(R.id.idSituationSpinner);

@@ -137,7 +137,7 @@ public class StructureChosenActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(StructureChosenActivity.this, CategoryChosenActivity.class);
+        Intent intent = new Intent(StructureChosenActivity.this, RecyclerViewActivity.class);
         intent.putExtra("category", structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("categoria")));
         startActivity(intent);
         finish();

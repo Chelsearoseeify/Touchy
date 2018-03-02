@@ -31,7 +31,7 @@ public class CategoriesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_structure_filter);
+        setContentView(R.layout.activity_categories);
 
         activitiesButton = (Button) findViewById(R.id.ActivitiesButton);
         careButton = (Button) findViewById(R.id.HealthButton);
@@ -109,7 +109,7 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     private void goToCategoriesPage(String category){
-        Intent intent = new Intent(CategoriesActivity.this, CategoryChosenActivity.class);
+        Intent intent = new Intent(CategoriesActivity.this, RecyclerViewActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
         finish();

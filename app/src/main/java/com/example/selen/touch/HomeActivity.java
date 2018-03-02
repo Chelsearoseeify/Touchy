@@ -51,7 +51,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private TextView txtName;
     //private TextView txtEmail;
-    private Button btnLogout;
     private Button btnMainPage;
 
     private SQLiteUserHandler db;
@@ -74,7 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         txtName = (TextView) findViewById(R.id.name);
-        btnLogout = (Button) findViewById(R.id.LogoutButton);
         btnMainPage = (Button) findViewById(R.id.MainPageButton);
         tb = (Toolbar)findViewById(R.id.tb);
 
@@ -97,15 +95,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         // Displaying the user details on the screen
         txtName.setText(name);
-
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
 
         //Go to main page of application
         btnMainPage.setOnClickListener(new View.OnClickListener(){
