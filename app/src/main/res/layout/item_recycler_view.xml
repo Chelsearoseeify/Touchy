@@ -12,11 +12,13 @@
     android:background="@color/white"
     android:foreground="?attr/selectableItemBackground"
     card_view:cardCornerRadius="@dimen/card_recycler_corner_radius"
-    card_view:cardElevation="@dimen/card_recycler_elevation">
+    card_view:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:padding="@dimen/text_margin">
 
         <RelativeLayout

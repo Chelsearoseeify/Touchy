@@ -5,23 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context="com.example.selen.touch.login.LoginActivity">
 
 
     <ImageView
         android:id="@+id/idLogo"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:contentDescription="@string/logo_content_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"    />
+        app:srcCompat="@drawable/logo_text"    />
 
 
     <TextView
@@ -49,8 +48,6 @@
         android:gravity="left"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,8 +64,6 @@
         android:gravity="left"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +79,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
-        android:background="@color/buttonColor"
+        android:background="@color/secondaryColor"
         android:gravity="center"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
@@ -113,7 +108,6 @@
         android:background="@null"
         android:text="@string/sign_up_text"
         android:textAllCaps="false"
-        android:textColor="#ffffff"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

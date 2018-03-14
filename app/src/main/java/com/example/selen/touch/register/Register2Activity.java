@@ -199,7 +199,7 @@ public class Register2Activity extends AppCompatActivity {
                         // Launch login activity
                         Intent intent = new Intent(
                                 Register2Activity.this,
-                                LoginActivity.class);
+                                WelcomeActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
