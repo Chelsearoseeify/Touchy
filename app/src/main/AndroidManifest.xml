@@ -86,6 +86,7 @@
         <activity android:name=".ShareViewActivity"/>
         <activity android:name=".RecyclerViewActivity"/>
         <activity android:name=".register.WelcomeActivity"></activity>
+        <activity android:name=".CategoryChosenFragmentActivity"></activity>
     </application>
 
 </manifest>

@@ -121,6 +121,28 @@ public class StructuresAdapter {
 
     }
 
+    public Cursor fetchStructuresByCategoryAndSegment(String category, String segment) throws SQLException {
+        Log.w(TAG, category);
+        Cursor mCursor = null;
+        if (category == null  ||  category.length () == 0)  {
+            mCursor = mDb.query(SQLITE_TABLE, new String[] {KEY_ROWID,KEY_STRUTTURA,
+                            KEY_CATEGORIA, KEY_SEGMENTO, KEY_TIPOLOGIA},
+                    null, null, null, null, null);
+
+        }
+        else {
+            mCursor = mDb.query(true, SQLITE_TABLE, new String[] {KEY_ROWID,KEY_STRUTTURA,
+                            KEY_CATEGORIA, KEY_SEGMENTO, KEY_TIPOLOGIA},
+                    KEY_CATEGORIA + " like '%" + category + "%' and " + KEY_SEGMENTO + " like '%" + segment + "%'", null,
+                    null, null, null, null);
+        }
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+
+    }
+
     public Cursor fetchAllStructures() {
 
         Cursor mCursor = mDb.query(SQLITE_TABLE, new String[] {KEY_ROWID,KEY_STRUTTURA,
@@ -147,6 +169,15 @@ public class StructuresAdapter {
         String categoria = mCursor.getString(mCursor.getColumnIndex(KEY_CATEGORIA));
 
 
+        return mCursor;
+    }
+
+    public Cursor getSegmentsPerCategory(String category){
+        Cursor mCursor = mDb.query(true, SQLITE_TABLE, new String[] {KEY_SEGMENTO}, KEY_CATEGORIA + " like '%" + category + "%'", null,
+                null, null, null, null );
+
+        if(mCursor != null)
+            mCursor.moveToFirst();
         return mCursor;
     }
 

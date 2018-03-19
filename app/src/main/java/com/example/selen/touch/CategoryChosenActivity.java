@@ -75,15 +75,6 @@ public class CategoryChosenActivity extends Activity {
                 });
 
 
-        //Clean all data
-        //dbStructureHelper.deleteAllStructures();
-        //Add some data
-        //dbStructureHelper.insertSomeStructures();
-
-        //Generate ListView from SQLite Database
-        //displayListView();
-        //display();
-
     }
 
     private ArrayList<Structure> createStructureList(ArrayList<Structure> structureList, String category){
@@ -112,90 +103,5 @@ public class CategoryChosenActivity extends Activity {
         startActivity(intent);
         finish();
     }
-/*
-    private void display(){
-        ListView listView = (ListView) findViewById(R.id.structures);
-        StructuresCursorAdapter structuresAdapter = new StructuresCursorAdapter(this, dbStructureHelper.fetchStructuresByCategory(currentCategory));
-        //GeoCursorAdapter geoAdapter = new GeoCursorAdapter(this, dbGeoHelper.fetchStructuresByCategory(currentCategory));
-        // Attach cursor adapter to the ListView
-        listView.setAdapter(structuresAdapter);
-        //listView.setAdapter(geoAdapter);
 
-
-
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> listView, View view, int position, long id) {
-                // Get the cursor, positioned to the corresponding row in the result set
-                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
-
-                // Get the state's capital from this row in the database.
-                String structureCode = cursor.getString(cursor.getColumnIndexOrThrow("struttura"));
-                //String countryCode = cursor.getString(cursor.getColumnIndexOrThrow("code"));
-                Toast.makeText(getApplicationContext(), structureCode, Toast.LENGTH_SHORT).show();
-
-
-
-                Intent intent = new Intent(CategoryChosenActivity.this, StructureChosenActivity.class);
-                intent.putExtra("id_struttura", cursor.getString(cursor.getColumnIndexOrThrow("_id")));
-                startActivity(intent);
-                finish();
-
-            }
-        });
-
-    }
-
-    private void displayListView() {
-
-
-        //Cursor cursor = dbStructureHelper.fetchAllStructures();
-        Cursor cursor = dbStructureHelper.fetchStructuresByCategory(currentCategory);
-
-
-        // The desired columns to be bound
-        String[] columns = new String[] {
-                StructuresAdapter.KEY_STRUTTURA,
-                StructuresAdapter.KEY_CATEGORIA,
-                StructuresAdapter.KEY_SEGMENTO,
-                StructuresAdapter.KEY_TIPOLOGIA
-        };
-
-        // the XML defined views which the data will be bound to
-        int[] to = new int[] {
-                R.id.struttura,
-                R.id.categoria,
-                R.id.segmento
-        };
-
-        // create the adapter using the cursor pointing to the desired data
-        //as well as the layout information
-        dataAdapter = new SimpleCursorAdapter(
-                this, R.layout.structure_info_cardview,
-                cursor,
-                columns,
-                to,
-                0);
-
-
-        ListView listView = (ListView) findViewById(R.id.structures);
-        // Assign adapter to ListView
-        listView.setAdapter(dataAdapter);
-
-
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> listView, View view, int position, long id) {
-                // Get the cursor, positioned to the corresponding row in the result set
-                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
-
-                // Get the state's capital from this row in the database.
-                String structureCode = cursor.getString(cursor.getColumnIndexOrThrow("struttura"));
-                //String countryCode = cursor.getString(cursor.getColumnIndexOrThrow("code"));
-                Toast.makeText(getApplicationContext(), structureCode, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
-*/
 }

@@ -109,7 +109,7 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     private void goToCategoriesPage(String category){
-        Intent intent = new Intent(CategoriesActivity.this, RecyclerViewActivity.class);
+        Intent intent = new Intent(CategoriesActivity.this, CategoryChosenFragmentActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
         finish();
