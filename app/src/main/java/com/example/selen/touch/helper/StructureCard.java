@@ -4,14 +4,14 @@ package com.example.selen.touch.helper;
  * Created by Administrator on 16/12/2017.
  */
 
-public class Structure {
+public class StructureCard {
 
     private Integer id;
     private String name;
     private String segmento;
     private String image;
 
-    public Structure(Integer id, String name, String segmento, String image) {
+    public StructureCard(Integer id, String name, String segmento, String image) {
         this.id = id;
         this.name = name;
         this.segmento = segmento;

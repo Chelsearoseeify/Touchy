@@ -1,7 +1,6 @@
-package com.example.selen.touch;
+package com.example.selen.touch.helper.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.selen.touch.helper.CategoryCard;
+import com.example.selen.touch.R;
 
 import java.util.List;
 
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> implements View.OnClickListener{
+public class CategoriesCardsAdapter extends RecyclerView.Adapter<CategoriesCardsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Album> albumList;
-    private String name;
-
-    @Override
-    public void onClick(View view) {
-        Intent i = new Intent(mContext, CategoryChosenFragmentActivity.class);
-        i.setData("category", name);
-        mContext.startActivity(i);
-    }
+    private List<CategoryCard> categoryCardList;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -42,10 +35,14 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         }
     }
 
+    public CategoryCard getItemAtPosition(int position){
+        CategoryCard cateogoryCard = categoryCardList.get(position);
+        return cateogoryCard;
+    }
 
-    public AlbumsAdapter(Context mContext, List<Album> albumList) {
+    public CategoriesCardsAdapter(Context mContext, List<CategoryCard> categoryCardList) {
         this.mContext = mContext;
-        this.albumList = albumList;
+        this.categoryCardList = categoryCardList;
     }
 
     @Override
@@ -58,17 +55,17 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Album album = albumList.get(position);
-        holder.title.setText(album.getName());
+        CategoryCard categoryCard = categoryCardList.get(position);
+        holder.title.setText(categoryCard.getName());
 
-        // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+        // loading categoryCard cover using Glide library
+        Glide.with(mContext).load(categoryCard.getThumbnail()).into(holder.thumbnail);
 
     }
 
 
     @Override
     public int getItemCount() {
-        return albumList.size();
+        return categoryCardList.size();
     }
 }

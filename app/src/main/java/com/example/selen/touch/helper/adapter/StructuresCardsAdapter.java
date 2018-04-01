@@ -18,19 +18,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.selen.touch.R;
 import com.example.selen.touch.ShareViewActivity;
-import com.example.selen.touch.helper.Structure;
+import com.example.selen.touch.helper.StructureCard;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class StructuresCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<Structure> structureList;
+    private List<StructureCard> structureCardList;
     private View parentView;
 
-    public RecyclerViewAdapter(Context context, List<Structure> structureList) {
+    public StructuresCardsAdapter(Context context, List<StructureCard> structureCardList) {
         this.context = context;
-        this.structureList = structureList;
+        this.structureCardList = structureCardList;
     }
 /*
     public void setItems(List<String> data) {
@@ -38,9 +38,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 */
-    public Structure getItemAtPosition(int position){
-        Structure structure = structureList.get(position);
-        return structure;
+    public StructureCard getItemAtPosition(int position){
+        StructureCard structureCard = structureCardList.get(position);
+        return structureCard;
     }
 
     @Override
@@ -56,14 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof RecyclerViewHolder) {
             final RecyclerViewHolder recyclerViewHolder = (RecyclerViewHolder) holder;
 
-            Structure structure = structureList.get(position);
+            StructureCard structureCard = structureCardList.get(position);
 
             Glide.with(context)
                     .load("https://www.selenemalosso.it/touch/structure_image/landscape.png")
                     .into(recyclerViewHolder.imageView);
 
-            ((RecyclerViewHolder) holder).textViewTitle.setText(structure.getName());
-            ((RecyclerViewHolder) holder).textViewSegment.setText(structure.getSegmento());
+            ((RecyclerViewHolder) holder).textViewTitle.setText(structureCard.getName());
+            ((RecyclerViewHolder) holder).textViewSegment.setText(structureCard.getSegmento());
 
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.anim_recycler_item_show);
             recyclerViewHolder.mView.startAnimation(animation);
@@ -100,7 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 */
     @Override
     public int getItemCount() {
-        return structureList.size();
+        return structureCardList.size();
     }
 
 
