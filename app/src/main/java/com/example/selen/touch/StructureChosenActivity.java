@@ -2,6 +2,7 @@ package com.example.selen.touch;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -9,35 +10,53 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.selen.touch.helper.adapter.ContactAdapter;
 import com.example.selen.touch.helper.adapter.GeoAdapter;
 import com.example.selen.touch.helper.adapter.StructuresAdapter;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Created by Administrator on 02/12/2017.
  */
 
-public class StructureChosenActivity extends AppCompatActivity {
+public class StructureChosenActivity extends FragmentActivity implements OnMapReadyCallback{
 
     ContactAdapter dbContact;
     StructuresAdapter dbStructures;
     GeoAdapter dbGeo;
-    TextView id, name, category, segment, tipology, site, mail, phone, latitude, longitude, address;
+    TextView id, name, category, segment, tipology, site, mail, phone, address;
     ImageButton imageButtonMail, imageButtonPhone, imageButtonWeb;
     Cursor structuresCursor, contactCursor, geoCursor;
+    private GoogleMap mMap;
+    private Double latitude, longitude;
+    private String structureName;
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.structure_layout);
+        setContentView(R.layout.activity_structure_chosen);
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragmentManager = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragmentManager.getMapAsync(this);
 
         imageButtonMail = (ImageButton) findViewById(R.id.imageButtonMail);
         imageButtonPhone = (ImageButton) findViewById(R.id.imageButtonPhone);
@@ -67,8 +86,6 @@ public class StructureChosenActivity extends AppCompatActivity {
         site = (TextView) findViewById(R.id.sitoView);
         mail = (TextView) findViewById(R.id.emailView);
         phone = (TextView) findViewById(R.id.phoneView);
-        latitude = (TextView) findViewById(R.id.latitudineView);
-        longitude = (TextView) findViewById(R.id.longitudineView);
         address = (TextView) findViewById(R.id.indirizzoView);
 
 
@@ -76,8 +93,10 @@ public class StructureChosenActivity extends AppCompatActivity {
         site.setText(contactCursor.getString(contactCursor.getColumnIndexOrThrow("sito")));
         mail.setText(contactCursor.getString(contactCursor.getColumnIndexOrThrow("mail")));
         phone.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("telefono")));
-        //latitude.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("latitudine")));
-        //longitude.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("longitudine")));
+
+        latitude = Double.parseDouble(geoCursor.getString(geoCursor.getColumnIndexOrThrow("latitudine")));
+        longitude = Double.parseDouble(geoCursor.getString(geoCursor.getColumnIndexOrThrow("longitudine")));
+        structureName = structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("struttura"));
         //address.setText(geoCursor.getString(geoCursor.getColumnIndexOrThrow("indirizzo")));
 
 
@@ -133,13 +152,29 @@ public class StructureChosenActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(StructureChosenActivity.this, RecyclerViewActivity.class);
+        Intent intent = new Intent(StructureChosenActivity.this, CategoryChosenFragmentActivity.class);
         intent.putExtra("category", structuresCursor.getString(structuresCursor.getColumnIndexOrThrow("categoria")));
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        float zoom = 15.50f;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(sydney).title(structureName));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), zoom));
+
+    }
+
+
 }

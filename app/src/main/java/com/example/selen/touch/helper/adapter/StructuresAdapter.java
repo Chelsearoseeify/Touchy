@@ -181,6 +181,15 @@ public class StructuresAdapter {
         return mCursor;
     }
 
+    public Cursor getCategories(){
+        Cursor mCursor = mDb.query(true, SQLITE_TABLE, new String[] {KEY_CATEGORIA},null, null,
+                null, null, null, null );
+
+        if(mCursor != null)
+            mCursor.moveToFirst();
+        return mCursor;
+    }
+
     public void insertSomeStructures() {
 
         createStructure(1,"ACI Patera Motors","Viaggiare","Emergenza","Soccorso Stradale");

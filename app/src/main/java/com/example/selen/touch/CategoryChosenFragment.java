@@ -1,5 +1,6 @@
 package com.example.selen.touch;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +16,11 @@ import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
 
 import com.example.selen.touch.helper.ItemClickSupport;
-import com.example.selen.touch.helper.Structure;
+import com.example.selen.touch.helper.StructureCard;
 import com.example.selen.touch.helper.adapter.ContactAdapter;
 import com.example.selen.touch.helper.adapter.GeoAdapter;
-import com.example.selen.touch.helper.adapter.RecyclerViewAdapter;
+import com.example.selen.touch.helper.adapter.StructuresCardsAdapter;
 import com.example.selen.touch.helper.adapter.StructuresAdapter;
-import com.example.selen.touch.helper.adapter.StructuresListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +29,12 @@ public class CategoryChosenFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter adapter;
+    private StructuresCardsAdapter adapter;
     private List<String> data;
     private String insertData;
     private boolean loading;
     private int loadTimes;
-    private List<Structure> structureList;
+    private List<StructureCard> structureCardList;
     private StructuresAdapter dbStructureHelper;
     private ContactAdapter dbContactHelper;
     private GeoAdapter dbGeoHelper;
@@ -48,7 +47,7 @@ public class CategoryChosenFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment, container, false);
+        View view = inflater.inflate(R.layout.activity_category_chosen_fragment, container, false);
 
         dbStructureHelper = new StructuresAdapter(getContext());
         dbContactHelper = new ContactAdapter(getContext());
@@ -64,22 +63,22 @@ public class CategoryChosenFragment extends Fragment {
         //currentCategory = "Mangiare";
 
 
-        structureList = new ArrayList<>();
-        createStructureList(structureList, currentCategory, currentSegment);
+        structureCardList = new ArrayList<>();
+        createStructureList(structureCardList, currentCategory, currentSegment);
 
 
 
         //initStructureList();
 
         //initData(20);
-        initView(structureList, view);
+        initView(structureCardList, view);
 
         //recyclerView = view.findViewById(R.id.structuresRecycle);
 
         return view;
     }
 
-    private List<Structure> createStructureList(List<Structure> structureList, String category, String segment){
+    private List<StructureCard> createStructureList(List<StructureCard> structureCardList, String category, String segment){
 
         Cursor structCursor = dbStructureHelper.fetchStructuresByCategoryAndSegment(category, segment);
         //Cursor geoCursor = dbGeoHelper.fetchAllStructures();
@@ -93,15 +92,15 @@ public class CategoryChosenFragment extends Fragment {
             //String image = geoCursor.getString(geoCursor.getColumnIndexOrThrow("image"));
             String image = dbGeoHelper.getImageFromId(Integer.parseInt(structCursor.getString(structCursor.getColumnIndexOrThrow("_id"))));
 
-            structureList.add(new Structure(idStruttura, nome, segmento, image));
+            structureCardList.add(new StructureCard(idStruttura, nome, segmento, image));
         }
 
-        return structureList;
+        return structureCardList;
     }
 
-    private void initView(List<Structure> structureList, View view) {
+    private void initView(List<StructureCard> structureCardList, View view) {
 
-        mRecyclerView = view.findViewById(R.id.recycler_view_recycler_view);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
 
         if (getScreenWidthDp() >= 1200) {
             final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
@@ -115,7 +114,7 @@ public class CategoryChosenFragment extends Fragment {
         }
 
 
-        adapter = new RecyclerViewAdapter(getContext(), structureList);
+        adapter = new StructuresCardsAdapter(getContext(), structureCardList);
         mRecyclerView.setAdapter(adapter);
         //adapter.setItems(data);
 
@@ -123,10 +122,11 @@ public class CategoryChosenFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        Structure structure = adapter.getItemAtPosition(position);
+                        StructureCard structureCard = adapter.getItemAtPosition(position);
                         Intent intent = new Intent(getActivity(), StructureChosenActivity.class);
-                        intent.putExtra("id_struttura", structure.getId());
+                        intent.putExtra("id_struttura", structureCard.getId());
                         startActivity(intent);
+
                     }
                 });
 

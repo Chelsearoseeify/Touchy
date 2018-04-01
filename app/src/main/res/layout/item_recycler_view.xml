@@ -11,8 +11,8 @@
     android:layout_marginTop="@dimen/card_margin_vertical_big_activity"
     android:background="@color/white"
     android:foreground="?attr/selectableItemBackground"
-    card_view:cardCornerRadius="@dimen/card_recycler_corner_radius"
-    card_view:cardElevation="4dp">
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="6dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

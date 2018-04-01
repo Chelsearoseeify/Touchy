@@ -30,7 +30,7 @@ public class CategoryChosenFragmentActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainsliding);
+        setContentView(R.layout.activity_category_chosen);
         Log.d(TAG, "onCreate: Starting.");
 
         //Adding navigation drawer
@@ -63,12 +63,15 @@ public class CategoryChosenFragmentActivity extends FragmentActivity {
 
 
         for(segments.moveToFirst(); !segments.isAfterLast(); segments.moveToNext()){
-            Bundle args = new Bundle();
-            args.putString("category", currentCategory);
-            args.putString("segment", segments.getString(segments.getColumnIndexOrThrow("segmento")));
-            Fragment fragment = new CategoryChosenFragment();
-            fragment.setArguments(args);
-            adapter.addFragment(fragment, segments.getString(segments.getColumnIndexOrThrow("segmento")));
+            String segment = segments.getString(segments.getColumnIndexOrThrow("segmento"));
+            if(!segment.contains(",")) {
+                Bundle args = new Bundle();
+                args.putString("category", currentCategory);
+                args.putString("segment", segment);
+                Fragment fragment = new CategoryChosenFragment();
+                fragment.setArguments(args);
+                adapter.addFragment(fragment, segments.getString(segments.getColumnIndexOrThrow("segmento")));
+            }
         }
 
         viewPager.setAdapter(adapter);
@@ -77,7 +80,7 @@ public class CategoryChosenFragmentActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(CategoryChosenFragmentActivity.this, CategoriesActivity.class);
+        Intent intent = new Intent(CategoryChosenFragmentActivity.this, CategoriesActivityRecycle.class);
         startActivity(intent);
         finish();
     }

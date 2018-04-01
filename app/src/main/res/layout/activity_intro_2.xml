@@ -7,36 +7,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.selen.touch.intro.IntroSecActivity"
-    android:background="@drawable/second_background_2">
+    android:background="@drawable/back2">
 
 
     <ImageView
         android:id="@+id/idLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@id/idSlogan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/clear_touch"
-        android:contentDescription="@string/logo_content_description" />
-
-    <ImageView
-        android:id="@+id/idSlogan"
-        android:layout_width="351dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="268dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:src="@drawable/slogan_2"
+        android:layout_width="320dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@string/logo_content_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/slogan_content_description" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208"
+        app:srcCompat="@drawable/touchname" />
+
+
 
 </android.support.constraint.ConstraintLayout>
